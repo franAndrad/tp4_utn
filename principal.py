@@ -41,14 +41,13 @@ def principal():
             mostrar_contador_por_tipo_y_pais(matriz_contadora)
         elif opcion == '7':
             if len(matriz_contadora) != 0:
-                pais = len(matriz_contadora)
-                tipo = len(matriz_contadora[0])
-                mostrar_cantidad_totalizada(matriz_contadora, pais, tipo)
-                mostrar_cantidad_totalizada(matriz_contadora, tipo, pais)
+                mostrar_cantidad_totalizada(matriz_contadora, 'pais')
+                mostrar_cantidad_totalizada(matriz_contadora, 'tipo')
             else:
                 imprimir_con_cabecera('Primero debe contar combinaciones entre tipo de vehículo y país de cabina (opcion 6)', 'ERROR')
-        # elif opcion == '8':
-        #     distancia_promedio(documento_binario)
+        elif opcion == '8':
+            v, promedio = distancia_promedio(documento_binario)
+            mostrar_registros_mayores_distancia_promedio(v, promedio)
         else:
             print('¡Ingrese una opción válida!')
 
