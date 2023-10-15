@@ -231,6 +231,36 @@ def generar_contador_por_tipo_y_pais(fd):
     return mat
 
 
+def determinar_vehiculo(vehiculo):
+    """
+    Determina el tipo de vehículo según el índice.
+
+    Parámetros:
+        vehiculo (int): Un índice que representa el tipo de vehículo.
+
+    Retorno:
+        str: Tipo de vehículo.
+    """
+    
+    tipos = 'Motocicleta', 'Auto', 'Camión'
+    return tipos[vehiculo]
+
+
+def determinar_pais(cabina):
+    """
+    Determina el país de la cabina según el índice.
+
+    Parámetros:
+        cabina (int): Un índice que representa el país de la cabina.
+
+    Retorno:
+        str: País de la cabina.
+    """
+    
+    paises = 'Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay'
+    return paises[cabina]
+
+
 def mostrar_contador_por_tipo_y_pais(matriz):
     """
     Muestra el contador de vehículos por tipo y país.
@@ -241,14 +271,15 @@ def mostrar_contador_por_tipo_y_pais(matriz):
     Retorno:
         None
     """
-    
+
     imprimir_con_formato('CANTIDAD DE VEHÍCULOS POR TIPO Y PAÍS DE CABINA')
     for i in range(len(matriz)):
         for j in range(len(matriz[i])):
-            respuesta_cant = 'Para el tipo de vehículo ' + str(j) + \
-                             ' y para el país de cabina ' + str(i) + \
+            respuesta_cant = 'Para el país de cabina ' + determinar_pais(i) + \
+                             ' y para el tipo de vehículo ' + determinar_vehiculo(j) + \
                              ' hay un total de ' + str(matriz[i][j]) + ' vehículos'
-            print(respuesta_cant)     
+            print(respuesta_cant)
+        print()     
     fin_imprimir_con_formato()
 
 
@@ -264,8 +295,6 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
         None
     """
     
-    tipos = 'Motocicleta', 'Auto', 'Camión'
-    paises = 'Argentina', 'Bolivia', 'Brasil', 'Paraguay', 'Uruguay'
     a, b, ac = 0, 0, 0
 
     if recorrer == 'pais':
@@ -278,13 +307,13 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
         for i in range(a):
             for j in range(b):
                 ac += matriz[i][j]
-            print('Para el país de la cabina', paises[i], 'hay un total de', ac, 'vehículos')
+            print('Para el país de la cabina', determinar_pais(i), 'hay un total de', ac, 'vehículos')
     elif recorrer == 'tipo':
         imprimir_con_formato('TOTAL DE VEHICULOS POR TIPO DE VEHICULO')
         for i in range(a):
             for j in range(b):
                 ac += matriz[j][i]
-            print('Para el tipo de vehículo', tipos[i], 'hay un total de', ac, 'vehículos')  
+            print('Para el tipo de vehículo', determinar_vehiculo(i), 'hay un total de', ac, 'vehículos')  
     fin_imprimir_con_formato()
 
 
