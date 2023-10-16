@@ -43,14 +43,5 @@ def validaciones(mensaje, rango_min, rango_max=None):
     return int(entrada)
             
 
-def validar_existencia_archivo(fd):
-    """
-    Valida si un archivo existe en el sistema.
-
-    Parametros:
-        fd (str): Ruta del archivo a verificar.
-    """
     
-    if not os.path.exists(fd):
-        print('El documento', fd, 'no existe!')
-        return
+

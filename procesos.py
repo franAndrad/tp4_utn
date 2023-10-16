@@ -41,6 +41,23 @@ def fin_imprimir_con_formato():
     print()
 
 
+def imprimir_cabecera():
+    """
+    Imprime la cabecera del formato a imprimir el registro.
+
+    Parámetros:
+        None
+
+    Retorno:
+        None
+    """
+    cabecera = "| {:^12} | {:^10} ({:^10}) | {:^15} | {:^12} | {:^13} | {:^10}(km) | {:^11} |".format(
+            'codigo', 'patente', 'origen', ' tipo', 'pago', 'cabina', 'recorrido', 'importe'
+        )
+    print(cabecera)
+    print('-' * 122)
+
+
 def cargar_datos_desde_csv(fd, fdb):
     """
     Carga datos desde un archivo CSV a un archivo binario.
@@ -53,7 +70,11 @@ def cargar_datos_desde_csv(fd, fdb):
         None
     """
 
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     if os.path.exists(fdb):
         while True:
@@ -113,7 +134,11 @@ def cargar_nuevo_ticket(fd):
         None
     """
     
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     m = open(fd, 'ab')
     codigo = validaciones('\nIngrese el número identificador del ticket', 1)
@@ -142,12 +167,17 @@ def mostrar_registros(fd):
         None
     """
 
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     t = os.path.getsize(fd)
     m = open(fd, 'rb')
     
     imprimir_con_formato('REGISTROS')
+    imprimir_cabecera()
     while m.tell() < t:
         ticket = pickle.load(m)
         print(ticket)
@@ -166,13 +196,18 @@ def mostrar_registros_por_patente(fd, p):
         None
     """
 
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     m = open(fd, 'rb')
     c = 0
     t = os.path.getsize(fd)
     
     imprimir_con_formato('MENSAJE')
+    imprimir_cabecera()
     while m.tell() < t:
         ticket = pickle.load(m)
         if ticket.patente == p.upper():
@@ -195,7 +230,11 @@ def buscar_ticket_por_codigo(fd, c):
         Ticket o str: El ticket si se encuentra, o un mensaje de error si no.
     """
 
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     t = os.path.getsize(fd)
     m = open(fd, 'rb')
@@ -217,7 +256,11 @@ def generar_contador_por_tipo_y_pais(fd):
         list: Una matriz de contadores por tipo y país.
     """
     
-    validar_existencia_archivo(fd)
+    if not os.path.exists(fd):
+        imprimir_con_formato('ERROR')
+        print('El documento', fd, 'no existe!')
+        fin_imprimir_con_formato()
+        return 
 
     m = open(fd, 'rb')
     t = os.path.getsize(fd)
@@ -391,7 +434,11 @@ def distancia_promedio(fdb):
         int: Un numero entero con el valor promedio de las distancias recorridas
     """
     
-    validar_existencia_archivo(fdb)
+    if not os.path.exists(fdb):
+        imprimir_con_formato('ERROR')
+        print('El documento', fdb, 'no existe!')
+        fin_imprimir_con_formato()
+        return
     
     v = []
     cantidad, suma = 0, 0
@@ -430,6 +477,7 @@ def mostrar_registros_mayores_distancia_promedio(v, p):
     ordenamiento_shell_sort(v) 
     
     imprimir_con_formato('REGISTROS MAYORES AL PROMEDIO')
+    imprimir_cabecera()
     for ticket in v:
         print(ticket)
     print('\nLa distancia promedio del registro fue de', p, 'km')
