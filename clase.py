@@ -76,16 +76,17 @@ class Ticket:
         self.km_recorrido = km_recorrido
 
     def __str__(self):
-        linea = "codigo:{:<15}" \
-                 "patente:{:<13}" \
+        linea = "id:{:<12}" \
+                 "patente:{:<10}" \
                  "pais:{:<13}" \
                  "tipo vehiculo:{:<15}" \
-                 "forma pago:{:<7}" \
+                 "forma pago:{:<12}" \
                  "cabina pais:{:<13}" \
-                 "km recorrido:{:<7}" \
-                 "importe: ${:<7}"
+                 "km recorrido:{:<5}" \
+                 "importe: ${:<5}"
         linea = linea.format(self.codigo, self.patente, origen_patentes_pais(self.patente), 
-                             procesos.determinar_vehiculo(self.tipo_vehiculo), self.forma_pago,
+                             procesos.determinar_vehiculo(self.tipo_vehiculo),
+                             procesos.determinar_forma_pago(self.forma_pago),
                              procesos.determinar_pais(self.cabina_pais), self.km_recorrido,
                              importe_acumulado_por_pagos(self.cabina_pais, self.tipo_vehiculo, self.forma_pago))
         return linea

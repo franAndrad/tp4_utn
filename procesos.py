@@ -261,6 +261,20 @@ def determinar_pais(cabina):
     return paises[cabina]
 
 
+def determinar_forma_pago(forma_pago):
+    """
+    Devuelve el nombre de la forma de pago según el índice.
+
+    Parámetros:
+        forma_pago (int): Índice que representa la forma de pago (1 para Manual, 2 para Telepeaje).
+
+    Retorno:
+        str: Nombre de la forma de pago.
+    """
+    formas = "Manual", "Telepeaje"
+    return formas[forma_pago - 1]
+
+
 def mostrar_contador_por_tipo_y_pais(matriz):
     """
     Muestra el contador de vehículos por tipo y país.
@@ -294,7 +308,7 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
     Retorno:
         None
     """
-    
+
     a, b, ac = 0, 0, 0
 
     if recorrer == 'pais':
@@ -305,12 +319,14 @@ def mostrar_cantidad_totalizada(matriz, recorrer):
     if recorrer == 'pais':
         imprimir_con_formato('TOTAL DE VEHICULOS POR PAIS')
         for i in range(a):
+            ac = 0
             for j in range(b):
                 ac += matriz[i][j]
             print('Para el país de la cabina', determinar_pais(i), 'hay un total de', ac, 'vehículos')
     elif recorrer == 'tipo':
         imprimir_con_formato('TOTAL DE VEHICULOS POR TIPO DE VEHICULO')
         for i in range(a):
+            ac = 0
             for j in range(b):
                 ac += matriz[j][i]
             print('Para el tipo de vehículo', determinar_vehiculo(i), 'hay un total de', ac, 'vehículos')  
