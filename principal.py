@@ -55,5 +55,6 @@ def principal():
             v, p = distancia_promedio(documento_binario)
             mostrar_registros_mayores_distancia_promedio(v, p)
 
+
 if __name__ == '__main__':
     principal()

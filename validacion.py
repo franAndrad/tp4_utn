@@ -1,6 +1,3 @@
-import os
-
-
 def validar_cadena(mensaje):
     """
     Valida que una cadena de texto tenga al menos un carácter.
@@ -41,7 +38,3 @@ def validaciones(mensaje, rango_min, rango_max=None):
         entrada = input(f"{mensaje}: ")
 
     return int(entrada)
-            
-
-    
-
