@@ -2,6 +2,7 @@ import pickle
 from clase import *
 from validacion import *
 import io
+import os
 
 
 def imprimir_con_formato(cabecera):
